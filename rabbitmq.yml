@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  local_rabbitmq:
+    container_name: local_rabbitmq
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=local
+    restart: always
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+    tmpfs: /var/lib/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+networks:
+  default:
+    external:
+      name: pk17_localhosts

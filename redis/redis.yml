@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  local_redis:
+    container_name: local_redis
+    image: redis:alpine
+    environment:
+      - REDIS_PASSWORD=redis1234
+    command: redis-server --requirepass redis1234
+    restart: always
+    healthcheck:
+      test: redis-cli -a redis1234 ping
+    tmpfs: /data
+    ports:
+      - 6379:6379
+networks:
+  default:
+    external:
+      name: pk17_localhosts

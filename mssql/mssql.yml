@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  mssql_localhost:
+    container_name: mssql_localhost
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - SA_PASSWORD=Local1234
+      - ACCEPT_EULA=Y
+    restart: always
+    ports:
+      - 1433:1433
+    volumes:
+      - mssql_localhost_data:/var/opt/mssql
+      - ./data:/mnt/data
+    networks:
+      mssql_localhost_network:
+volumes:
+  mssql_localhost_data:
+    name: mssql_localhost_data
+networks:
+  mssql_localhost_network:
+    name: mssql_localhost_network

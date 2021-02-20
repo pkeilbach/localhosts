@@ -1,0 +1,4 @@
+CREATE USER IF NOT EXISTS 'local'@'%' IDENTIFIED BY 'l0ca1';
+GRANT ALL ON *.* TO 'local'@'%';
+
+CREATE USER IF NOT EXISTS 'test'@'%' IDENTIFIED BY 't3st';

@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  local_mysql5:
+    container_name: local_mysql5
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=local1234
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u test -pt3st
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - local_mysql5_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+  local_mysql5_data:
+    name: local_mysql5_data
+networks:
+  default:
+    external:
+      name: pk17_localhosts
